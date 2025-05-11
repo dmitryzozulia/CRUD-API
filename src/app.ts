@@ -1,4 +1,4 @@
-import http from 'http';
+import http from 'node:http';
 import { router } from './routes/routes';
 import dotenv from 'dotenv';
 

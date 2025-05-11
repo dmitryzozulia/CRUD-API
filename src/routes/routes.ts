@@ -1,6 +1,6 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from 'node:http';
 import { sendJson } from '../utils/sendJson';
-import { parse } from 'url';
+import { parse } from 'node:url';
 import { validate as validateUUID } from 'uuid';
 import {
   getUsers,

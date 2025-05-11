@@ -1,7 +1,7 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from 'node:http';
 import { users, User } from '../models/user';
 import { sendJson } from '../utils/sendJson';
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 
 export const getUsers = async (res: ServerResponse) => {
   sendJson(
@@ -36,7 +36,6 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
 
 export const getUserById = async (res: ServerResponse, userId: string) => {
   const user = users.find((user) => user.id === userId);
-  console.log(user);
   if (user) {
     sendJson(res, 200, user);
     return;

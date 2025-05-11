@@ -5,6 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "start:dev": "ts-node-dev src/app.ts",
+    "start:prod": "webpack --config webpack.config.js && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -16,14 +17,16 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "clean-webpack-plugin": "^4.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
+    "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^5.8.3",
-    "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.1"
+    "webpack": "^5.99.8",
+    "webpack-cli": "^4.10.0"
   },
   "author": "Dmytro Zozulia",
   "license": "ISC"
