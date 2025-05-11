@@ -2,26 +2,35 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { sendJson } from '../utils/sendJson';
 import { parse } from 'url';
 import { validate as validateUUID } from 'uuid';
+import {
+  getUsers,
+  createUser,
+  getUserById,
+  deleteUserById,
+  updateUserById,
+} from '../userController/userController';
 
 export const router = async (req: IncomingMessage, res: ServerResponse) => {
   const { pathname } = parse(req.url || '', true);
   const method = req.method;
 
   if (pathname === '/api/users') {
-    if (method === 'GET') return console.log('Get all users');
-    if (method === 'POST') return console.log('Create a new user');
+    if (method === 'GET') return await getUsers(res);
+    if (method === 'POST') return await createUser(req, res);
   }
-
-  if (pathname?.startsWith('api/users/')) {
+  console.log('Pathname:', pathname);
+  if (pathname?.startsWith('/api/users/')) {
     const userId = pathname.split('/')[3];
+
     if (!validateUUID(userId)) {
-      return console.log('Invalid UUID format');
+      return sendJson(res, 400, 'Invalid UUID format');
     }
-  }
-  if (pathname?.startsWith('api/users/')) {
-    if (method === 'GET') return console.log('Get user by ID');
-    if (method === 'PUT') return console.log('Update user by ID');
-    if (method === 'DELETE') return console.log('Delete user by ID');
+
+    if (method === 'GET') {
+      return await getUserById(res, userId);
+    }
+    if (method === 'PUT') return updateUserById(req, res, userId);
+    if (method === 'DELETE') return await deleteUserById(res, userId);
   }
   sendJson(res, 404, { message: 'Not Found' });
 };
