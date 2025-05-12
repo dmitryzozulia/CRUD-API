@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "ts-node-dev src/app.ts",
     "start:prod": "webpack --config webpack.config.js && node dist/app.js",
+    "start:multi": "ts-node src/cluster.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
