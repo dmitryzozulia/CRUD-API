@@ -4,11 +4,7 @@ import { sendJson } from '../utils/sendJson';
 import { randomUUID } from 'node:crypto';
 
 export const getUsers = async (res: ServerResponse) => {
-  sendJson(
-    res,
-    200,
-    users.length ? users : 'No users found. Please add some users.',
-  );
+  sendJson(res, 200, users);
 };
 
 export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
@@ -26,7 +22,7 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
       }
       users.push(newUser);
       process.send?.({ type: 'createUser', data: newUser });
-      sendJson(res, 201, newUser);
+      sendJson(res, 201, 'User created successfully');
     } catch (error) {
       sendJson(res, 400, 'Invalid JSON format');
     }
